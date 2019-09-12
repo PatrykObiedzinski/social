@@ -11,11 +11,11 @@ public abstract class BaseDaoConfiguration {
     private EntityManager entityManager;
     private JPAQueryFactory queryFactory;
 
-    protected EntityManager entityManager() {
+    protected EntityManager getEntityManager() {
         return entityManager;
     }
 
-    protected JPAQueryFactory queryFactory() {
+    protected JPAQueryFactory getQueryFactory() {
         if (queryFactory == null) {
             queryFactory = new JPAQueryFactory(entityManager);
         }
