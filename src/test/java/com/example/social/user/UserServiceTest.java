@@ -2,10 +2,14 @@ package com.example.social.user;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.*;
+import org.mockito.ArgumentCaptor;
+import org.mockito.Captor;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.verify;
 
 @RunWith(MockitoJUnitRunner.class)
 public class UserServiceTest {
@@ -28,7 +32,7 @@ public class UserServiceTest {
         userService.addUser(user);
 
         // then
-        Mockito.verify(userDao).save(saveArgumentCaptor.capture());
+        verify(userDao).save(saveArgumentCaptor.capture());
         assertThat(saveArgumentCaptor.getValue()).isEqualToComparingFieldByField(mockUser());
     }
 
