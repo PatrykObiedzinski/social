@@ -24,7 +24,7 @@ public class FollowControllerIntegrationTest extends BaseIntegrationTest {
         assertThat(mvcResult.getResponse().getContentAsString()).isEmpty();
     }
 
-    private Object mockFollowDto() {
+    private FollowDto mockFollowDto() {
         return FollowDto.builder()
                 .followerId(NONEXISTENT_FOLLOWER_ID)
                 .followingId(NONEXISTENT_FOLLOWING_ID)
