@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 @Entity
@@ -23,8 +24,10 @@ public class Follow implements Serializable {
     private Long id;
 
     @OneToOne
+    @NotNull
     private User follower;
 
     @OneToOne
+    @NotNull
     private User following;
 }
