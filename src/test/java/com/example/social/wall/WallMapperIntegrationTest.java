@@ -1,12 +1,11 @@
 package com.example.social.wall;
 
 import com.example.social.BaseIntegrationTest;
-import com.example.social.post.Post;
 import com.example.social.user.User;
-import com.google.common.collect.ImmutableList;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import static java.util.Collections.emptyList;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class WallMapperIntegrationTest extends BaseIntegrationTest {
@@ -26,17 +25,22 @@ public class WallMapperIntegrationTest extends BaseIntegrationTest {
 
         // then
         assertThat(wallDto).satisfies(singleWall -> {
-            assertThat(singleWall.getId()).isEqualTo(wall.getId());
-            assertThat(singleWall.getOwner()).isEqualToComparingFieldByField(wall.getOwner());
-            assertThat(singleWall.getPosts()).containsAll(wall.getPosts());
+            assertThat(singleWall.getOwnerName()).isEqualTo(wall.getOwner().getName());
+            assertThat(singleWall.getOwnerSurname()).isEqualTo(wall.getOwner().getSurname());
+            assertThat(singleWall.getPosts()).isEmpty();
         });
     }
 
     private Wall mockWall() {
         return Wall.builder()
                 .id(MOCKED_OWNER_ID)
-                .owner(User.builder().build())
-                .posts(ImmutableList.of(Post.builder().build()))
+                .owner(mockUser())
+                .build();
+    }
+
+    private User mockUser() {
+        return User.builder()
+                .posts(emptyList())
                 .build();
     }
 }

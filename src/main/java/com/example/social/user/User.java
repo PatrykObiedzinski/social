@@ -36,6 +36,7 @@ public class User implements Serializable {
     private List<Follow> follows;
 
     @OneToMany
+    @OrderBy("CREATION_TIME DESC")
     private List<Post> posts;
 
     @OneToOne

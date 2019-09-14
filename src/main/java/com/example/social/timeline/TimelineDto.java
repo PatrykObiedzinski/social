@@ -1,8 +1,7 @@
 package com.example.social.timeline;
 
-import com.example.social.follow.Follow;
-import com.example.social.post.Post;
-import com.example.social.user.User;
+import com.example.social.follow.FollowDto;
+import com.example.social.post.PostDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -16,16 +15,16 @@ import java.util.List;
 @Builder
 public class TimelineDto {
 
-    private Long id;
-    private User owner;
-    private List<Follow> follows;
-    private List<Post> posts;
+    private String ownerName;
+    private String ownerSurname;
+    private List<FollowDto> follows;
+    private List<PostDto> posts;
 
     @Override
     public String toString() {
         return "TimelineDto{" +
-                "id=" + id +
-                ", owner=" + owner +
+                "ownerName='" + ownerName + '\'' +
+                ", ownerSurname='" + ownerSurname + '\'' +
                 ", follows=" + follows +
                 ", posts=" + posts +
                 '}';

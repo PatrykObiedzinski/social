@@ -1,7 +1,6 @@
 package com.example.social.wall;
 
-import com.example.social.post.Post;
-import com.example.social.user.User;
+import com.example.social.post.PostDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -15,15 +14,15 @@ import java.util.List;
 @Builder
 class WallDto {
 
-    private long id;
-    private User owner;
-    private List<Post> posts;
+    private String ownerName;
+    private String ownerSurname;
+    private List<PostDto> posts;
 
     @Override
     public String toString() {
-        return "Wall{" +
-                "id=" + id +
-                ", owner=" + owner +
+        return "WallDto{" +
+                "ownerName='" + ownerName + '\'' +
+                ", ownerSurname='" + ownerSurname + '\'' +
                 ", posts=" + posts +
                 '}';
     }

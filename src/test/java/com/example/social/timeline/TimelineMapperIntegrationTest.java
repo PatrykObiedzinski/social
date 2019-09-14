@@ -1,13 +1,11 @@
 package com.example.social.timeline;
 
 import com.example.social.BaseIntegrationTest;
-import com.example.social.follow.Follow;
-import com.example.social.post.Post;
 import com.example.social.user.User;
-import com.google.common.collect.ImmutableList;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import static java.util.Collections.emptyList;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class TimelineMapperIntegrationTest extends BaseIntegrationTest {
@@ -27,22 +25,24 @@ public class TimelineMapperIntegrationTest extends BaseIntegrationTest {
 
         // then
         assertThat(timelineDto).satisfies(singleTimeline -> {
-            assertThat(singleTimeline.getId()).isEqualTo(timeline.getId());
-            assertThat(singleTimeline.getOwner()).isEqualToComparingFieldByField(timeline.getOwner());
-            assertThat(singleTimeline.getFollows()).containsAll(timeline.getFollows());
-            assertThat(singleTimeline.getPosts()).containsAll(timeline.getPosts());
+            assertThat(singleTimeline.getOwnerName()).isEqualTo(timeline.getOwner().getName());
+            assertThat(singleTimeline.getOwnerSurname()).isEqualTo(timeline.getOwner().getSurname());
+            assertThat(singleTimeline.getFollows()).isEmpty();
+            assertThat(singleTimeline.getPosts()).isEmpty();
         });
     }
 
     private Timeline mockTimeline() {
-        ImmutableList<Follow> mockedFollows = ImmutableList.of(Follow.builder().build());
-        ImmutableList<Post> mockedPosts = ImmutableList.of(Post.builder().build());
-
         return Timeline.builder()
                 .id(MOCKED_OWNER_ID)
-                .owner(User.builder().build())
-                .follows(mockedFollows)
-                .posts(mockedPosts)
+                .owner(mockUser())
+                .build();
+    }
+
+    private User mockUser() {
+        return User.builder()
+                .follows(emptyList())
+                .posts(emptyList())
                 .build();
     }
 }

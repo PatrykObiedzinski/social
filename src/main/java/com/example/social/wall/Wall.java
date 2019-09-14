@@ -1,6 +1,5 @@
 package com.example.social.wall;
 
-import com.example.social.post.Post;
 import com.example.social.user.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,7 +8,6 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.List;
 
 @Entity
 @Table(name = "WALL")
@@ -26,8 +24,4 @@ public class Wall implements Serializable {
 
     @OneToOne
     private User owner;
-
-    @OneToMany
-    @OrderBy("CREATION_TIME DESC")
-    private List<Post> posts;
 }
