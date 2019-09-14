@@ -13,17 +13,17 @@ import java.time.LocalDateTime;
 @Builder
 public class PostDto {
 
-    private String content;
     private String authorName;
     private String authorSurname;
+    private String content;
     private LocalDateTime creationTime;
 
     @Override
     public String toString() {
         return "PostDto{" +
-                "content='" + content + '\'' +
-                ", authorName='" + authorName + '\'' +
+                "authorName='" + authorName + '\'' +
                 ", authorSurname='" + authorSurname + '\'' +
+                ", content='" + content + '\'' +
                 ", creationTime=" + creationTime +
                 '}';
     }
