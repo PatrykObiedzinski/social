@@ -38,7 +38,7 @@ public class FollowServiceTest {
     @Test
     public void should_add_follow() {
         // given
-        given(userDao.findUserById(anyLong()))
+        given(userDao.findById(anyLong()))
                 .willReturn(Optional.of(mockUser(MOCKED_FOLLOWER_ID)))
                 .willReturn(Optional.of(mockUser(MOCKED_FOLLOWING_ID)));
         FollowDto followDto = mockFollowDto();

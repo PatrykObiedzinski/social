@@ -23,7 +23,7 @@ public class WallDaoIntegrationTest extends BaseIntegrationTest {
         Wall wall = mockWall();
 
         // when
-        Optional<Wall> wallFromDatabase = wallDao.findWallByOwnerId(MOCKED_OWNER_ID);
+        Optional<Wall> wallFromDatabase = wallDao.findByOwnerId(MOCKED_OWNER_ID);
 
         // then
         assertThat(wallFromDatabase).hasValue(wall);
@@ -39,7 +39,7 @@ public class WallDaoIntegrationTest extends BaseIntegrationTest {
         wallDao.save(wall);
 
         // then
-        assertThat(wallDao.findWallByOwnerId(1)).isNotNull();
+        assertThat(wallDao.findByOwnerId(1)).isNotNull();
     }
 
     private Wall mockWall() {

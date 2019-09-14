@@ -26,7 +26,7 @@ class FollowService {
 
     private User getUserById(FollowDto followDto, Function<FollowDto, Long> followDtoToId) {
         Long id = followDtoToId.apply(followDto);
-        return userDao.findUserById(id)
+        return userDao.findById(id)
                 .orElseThrow(() -> new UserNotFoundException(id));
     }
 

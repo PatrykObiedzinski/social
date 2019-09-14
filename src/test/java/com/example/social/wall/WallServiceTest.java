@@ -28,7 +28,7 @@ public class WallServiceTest {
     @Test
     public void should_return_a_wall_by_owner_id() {
         // given
-        given(wallDao.findWallByOwnerId(anyLong())).willReturn(Optional.of(mockWall()));
+        given(wallDao.findByOwnerId(anyLong())).willReturn(Optional.of(mockWall()));
 
         // when
         Wall wall = wallService.getWallByOwnerId(MOCKED_OWNER_ID);
@@ -40,7 +40,7 @@ public class WallServiceTest {
     @Test
     public void should_throw_an_exception_when_no_wall_found() {
         // given
-        given(wallDao.findWallByOwnerId(anyLong())).willReturn(Optional.empty());
+        given(wallDao.findByOwnerId(anyLong())).willReturn(Optional.empty());
 
         // when-then
         assertThatThrownBy(() -> wallService.getWallByOwnerId(MOCKED_OWNER_ID))

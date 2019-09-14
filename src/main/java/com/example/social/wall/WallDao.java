@@ -10,7 +10,7 @@ import static com.example.social.wall.QWall.wall;
 @Repository
 public class WallDao extends BaseDaoConfiguration {
 
-    Optional<Wall> findWallByOwnerId(long ownerId) {
+    Optional<Wall> findByOwnerId(long ownerId) {
         return Optional.ofNullable(getQueryFactory()
                 .selectFrom(wall)
                 .where(wall.owner.id.eq(ownerId))

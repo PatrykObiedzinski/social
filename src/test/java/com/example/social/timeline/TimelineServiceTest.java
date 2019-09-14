@@ -29,7 +29,7 @@ public class TimelineServiceTest {
     @Test
     public void should_return_a_timeline_by_owner_id() {
         // given
-        given(timelineDao.findTimelineByOwnerId(anyLong())).willReturn(Optional.of(mockTimeline()));
+        given(timelineDao.findByOwnerId(anyLong())).willReturn(Optional.of(mockTimeline()));
 
         // when
         Timeline timeline = timelineService.getTimelineByOwnerId(MOCKED_OWNER_ID);
@@ -41,7 +41,7 @@ public class TimelineServiceTest {
     @Test
     public void should_throw_an_exception_when_no_timeline_found() {
         // given
-        given(timelineDao.findTimelineByOwnerId(anyLong())).willReturn(Optional.empty());
+        given(timelineDao.findByOwnerId(anyLong())).willReturn(Optional.empty());
 
         // when-then
         assertThatThrownBy(() -> timelineService.getTimelineByOwnerId(MOCKED_OWNER_ID))

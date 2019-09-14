@@ -26,7 +26,7 @@ public class TimelineDaoIntegrationTest extends BaseIntegrationTest {
         Timeline timeline = mockTimeline();
 
         // when
-        Optional<Timeline> timelineFromDatabase = timelineDao.findTimelineByOwnerId(MOCKED_OWNER_ID);
+        Optional<Timeline> timelineFromDatabase = timelineDao.findByOwnerId(MOCKED_OWNER_ID);
 
         // then
         assertThat(timelineFromDatabase).hasValue(timeline);
@@ -42,7 +42,7 @@ public class TimelineDaoIntegrationTest extends BaseIntegrationTest {
         timelineDao.save(timeline);
 
         // then
-        assertThat(timelineDao.findTimelineByOwnerId(1)).isNotNull();
+        assertThat(timelineDao.findByOwnerId(1)).isNotNull();
     }
 
     private Timeline mockTimeline() {

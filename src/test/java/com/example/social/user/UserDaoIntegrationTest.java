@@ -27,7 +27,7 @@ public class UserDaoIntegrationTest extends BaseIntegrationTest {
         User user = mockUser();
 
         // when
-        Optional<User> userFromDatabase = userDao.findUserById(MOCKED_USER_ID);
+        Optional<User> userFromDatabase = userDao.findById(MOCKED_USER_ID);
 
         // then
         assertThat(userFromDatabase).hasValue(user);
@@ -43,7 +43,7 @@ public class UserDaoIntegrationTest extends BaseIntegrationTest {
         userDao.save(user);
 
         // then
-        assertThat(userDao.findUserById(1)).isNotNull();
+        assertThat(userDao.findById(1)).isNotNull();
     }
 
     private User mockUser() {

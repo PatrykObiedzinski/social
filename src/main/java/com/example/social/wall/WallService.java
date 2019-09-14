@@ -11,7 +11,7 @@ public class WallService {
     private final WallDao wallDao;
 
     Wall getWallByOwnerId(long ownerId) {
-        return wallDao.findWallByOwnerId(ownerId)
+        return wallDao.findByOwnerId(ownerId)
                 .orElseThrow(() -> new WallNotFoundException(ownerId));
     }
 

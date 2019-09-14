@@ -11,7 +11,7 @@ public class TimelineService {
     private final TimelineDao timelineDao;
 
     Timeline getTimelineByOwnerId(long ownerId) {
-        return timelineDao.findTimelineByOwnerId(ownerId)
+        return timelineDao.findByOwnerId(ownerId)
                 .orElseThrow(() -> new TimelineNotFoundException(ownerId));
     }
 
