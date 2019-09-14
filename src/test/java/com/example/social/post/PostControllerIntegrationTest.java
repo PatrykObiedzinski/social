@@ -18,6 +18,6 @@ public class PostControllerIntegrationTest extends BaseIntegrationTest {
                 .andReturn();
 
         // then
-        assertThat(mvcResult.getResponse().getContentAsString()).isNotEmpty();
+        assertThat(mvcResult.getResponse().getContentAsString()).isEmpty();
     }
 }

@@ -11,7 +11,7 @@ public class UserService {
     private final UserDao userDao;
 
     @Transactional
-    public void addUser(User user) {
-        userDao.save(user);
+    public User addUser(User user) {
+        return userDao.save(user);
     }
 }

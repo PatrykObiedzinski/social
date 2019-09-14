@@ -1,9 +1,11 @@
 package com.example.social.post;
 
+import com.example.social.timeline.Timeline;
 import com.example.social.timeline.TimelineService;
 import com.example.social.user.User;
 import com.example.social.user.UserService;
 import com.example.social.utils.TimeUtil;
+import com.example.social.wall.Wall;
 import com.example.social.wall.WallService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -18,7 +20,6 @@ import java.time.LocalDateTime;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
-import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.verify;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -48,9 +49,9 @@ public class PostServiceImplTest {
     public void should_add_post() {
         // given
         given(timeUtil.getCurrentDate()).willReturn(MOCKED_CREATION_TIME);
-        doNothing().when(userService).addUser(any());
-        doNothing().when(timelineService).addTimeline(any());
-        doNothing().when(wallService).addWall(any());
+        given(userService.addUser(any())).willReturn(mockUser());
+        given(timelineService.addTimeline(any())).willReturn(mockTimeline());
+        given(wallService.addWall(any())).willReturn(mockWall());
 
         // when
         postService.addPost(MOCKED_TEXT_MESSAGE);
@@ -58,7 +59,7 @@ public class PostServiceImplTest {
         // then
         verify(postDao).save(saveArgumentCaptor.capture());
         assertThat(saveArgumentCaptor.getValue()).satisfies(singlePost -> {
-            assertThat(singlePost.getAuthor()).isEqualToComparingFieldByField(mockUser());
+            assertThat(singlePost.getAuthor()).isEqualToComparingFieldByFieldRecursively(mockUser());
             assertThat(singlePost.getContent()).isEqualTo(MOCKED_TEXT_MESSAGE);
             assertThat(singlePost.getCreationTime()).isEqualTo(MOCKED_CREATION_TIME);
         });
@@ -68,6 +69,18 @@ public class PostServiceImplTest {
         return User.builder()
                 .name("Patryk")
                 .surname("Obiedziński")
+                .timeline(mockTimeline())
+                .wall(mockWall())
+                .build();
+    }
+
+    private Timeline mockTimeline() {
+        return Timeline.builder()
+                .build();
+    }
+
+    private Wall mockWall() {
+        return Wall.builder()
                 .build();
     }
 }

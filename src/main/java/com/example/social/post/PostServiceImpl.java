@@ -29,32 +29,37 @@ class PostServiceImpl implements PostService {
     }
 
     private User addUserWithTimelineAndWall() {
-        addTimeline();
-        addWall();
-        User author = addUser();
-        userService.addUser(author);
+        Timeline timeline = timelineService.addTimeline(Timeline.builder().build());
+        Wall wall = wallService.addWall(Wall.builder().build());
+        User builtAuthor = buildNewUser(timeline, wall);
+
+        User author = userService.addUser(builtAuthor);
+        addOwnerToTimeline(author, timeline);
+        addOwnerToWall(author, wall);
         return author;
     }
 
-    private void addTimeline() {
-        timelineService.addTimeline(Timeline.builder().build());
-    }
-
-    private void addWall() {
-        wallService.addWall(Wall.builder().build());
-    }
-
-    private User addUser() {
-        User author = buildNewUser();
-        userService.addUser(author);
-        return author;
-    }
-
-    private User buildNewUser() {
+    private User buildNewUser(Timeline timeline, Wall wall) {
         return User.builder()
                 .name("Patryk")
                 .surname("Obiedziński")
+                .timeline(timeline)
+                .wall(wall)
                 .build();
+    }
+
+    private void addOwnerToTimeline(User owner, Timeline timeline) {
+        Timeline updatedTimeline = timeline.toBuilder()
+                .owner(owner)
+                .build();
+        timelineService.addTimeline(updatedTimeline);
+    }
+
+    private void addOwnerToWall(User owner, Wall wall) {
+        Wall updatedWall = wall.toBuilder()
+                .owner(owner)
+                .build();
+        wallService.addWall(updatedWall);
     }
 
     private Post buildPost(User author, String content) {

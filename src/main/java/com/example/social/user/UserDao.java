@@ -19,7 +19,7 @@ public class UserDao extends BaseDaoConfiguration {
     }
 
     @Transactional
-    void save(User user) {
-        getEntityManager().merge(user);
+    User save(User user) {
+        return getEntityManager().merge(user);
     }
 }

@@ -19,7 +19,7 @@ class TimelineDao extends BaseDaoConfiguration {
     }
 
     @Transactional
-    void save(Timeline timeline) {
-        getEntityManager().merge(timeline);
+    Timeline save(Timeline timeline) {
+        return getEntityManager().merge(timeline);
     }
 }

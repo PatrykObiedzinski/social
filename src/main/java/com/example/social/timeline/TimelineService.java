@@ -16,7 +16,7 @@ public class TimelineService {
     }
 
     @Transactional
-    public void addTimeline(Timeline timeline) {
-        timelineDao.save(timeline);
+    public Timeline addTimeline(Timeline timeline) {
+        return timelineDao.save(timeline);
     }
 }

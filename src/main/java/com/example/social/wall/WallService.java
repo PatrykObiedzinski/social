@@ -16,7 +16,7 @@ public class WallService {
     }
 
     @Transactional
-    public void addWall(Wall wall) {
-        wallDao.save(wall);
+    public Wall addWall(Wall wall) {
+        return wallDao.save(wall);
     }
 }

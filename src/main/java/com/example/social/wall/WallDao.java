@@ -19,7 +19,7 @@ public class WallDao extends BaseDaoConfiguration {
     }
 
     @Transactional
-    void save(Wall wall) {
-        getEntityManager().merge(wall);
+    Wall save(Wall wall) {
+        return getEntityManager().merge(wall);
     }
 }
