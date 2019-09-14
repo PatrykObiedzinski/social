@@ -18,6 +18,10 @@ class FollowService {
 
     @Transactional
     void addFollow(FollowDto followDto) {
+        if (followDto.getFollowerId().equals(followDto.getFollowingId())) {
+            throw new IdenticalUsersException();
+        }
+
         User follower = getUserById(followDto, FollowDto::getFollowerId);
         User following = getUserById(followDto, FollowDto::getFollowingId);
 
