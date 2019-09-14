@@ -4,6 +4,7 @@ import com.example.social.BaseIntegrationTest;
 import com.example.social.user.User;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -15,6 +16,7 @@ public class FollowDaoIntegrationTest extends BaseIntegrationTest {
     private FollowDao followDao;
 
     @Test
+    @Transactional
     public void should_add_follow() {
         // given
         Follow follow = mockFollow();
