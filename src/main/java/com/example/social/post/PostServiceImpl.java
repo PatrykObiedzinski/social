@@ -11,6 +11,10 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
+import static java.util.Collections.emptyList;
+
 @Service
 @AllArgsConstructor
 class PostServiceImpl implements PostService {
@@ -24,8 +28,9 @@ class PostServiceImpl implements PostService {
     @Transactional
     public void addPost(String content) {
         User author = addUserWithTimelineAndWall();
-        Post post = buildPost(author, content);
-        postDao.save(post);
+        Post builtPost = buildPost(author, content);
+        Post post = postDao.save(builtPost);
+        updateAuthorPosts(author, post);
     }
 
     private User addUserWithTimelineAndWall() {
@@ -43,6 +48,8 @@ class PostServiceImpl implements PostService {
         return User.builder()
                 .name("Patryk")
                 .surname("Obiedziński")
+                .follows(emptyList())
+                .posts(emptyList())
                 .timeline(timeline)
                 .wall(wall)
                 .build();
@@ -67,6 +74,15 @@ class PostServiceImpl implements PostService {
                 .author(author)
                 .content(content)
                 .creationTime(timeUtil.getCurrentDate())
+                .build();
+    }
+
+    private void updateAuthorPosts(User author, Post post) {
+        List<Post> currentPosts = author.getPosts();
+        currentPosts.add(post);
+
+        author.toBuilder()
+                .posts(currentPosts)
                 .build();
     }
 }

@@ -19,7 +19,7 @@ class PostDao extends BaseDaoConfiguration {
     }
 
     @Transactional
-    void save(Post post) {
-        getEntityManager().merge(post);
+    Post save(Post post) {
+        return getEntityManager().merge(post);
     }
 }
