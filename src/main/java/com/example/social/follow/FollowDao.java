@@ -2,6 +2,7 @@ package com.example.social.follow;
 
 import com.example.social.configuration.BaseDaoConfiguration;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
@@ -17,7 +18,8 @@ public class FollowDao extends BaseDaoConfiguration {
                 .fetchOne());
     }
 
+    @Transactional
     void save(Follow follow) {
-        getEntityManager().persist(follow);
+        getEntityManager().merge(follow);
     }
 }

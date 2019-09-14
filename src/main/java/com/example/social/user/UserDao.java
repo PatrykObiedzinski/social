@@ -2,6 +2,7 @@ package com.example.social.user;
 
 import com.example.social.configuration.BaseDaoConfiguration;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
@@ -17,6 +18,7 @@ public class UserDao extends BaseDaoConfiguration {
                 .fetchOne());
     }
 
+    @Transactional
     void save(User user) {
         getEntityManager().merge(user);
     }
