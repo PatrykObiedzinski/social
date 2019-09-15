@@ -33,6 +33,14 @@ class PostServiceImpl implements PostService {
         updateAuthorPosts(author, post);
     }
 
+    @Transactional
+    public void addPostByUser(long authorId, String content) {
+        User author = userService.findById(authorId);
+        Post builtPost = buildPost(author, content);
+        Post post = postDao.save(builtPost);
+        updateAuthorPosts(author, post);
+    }
+
     private User addUserWithTimelineAndWall() {
         Timeline timeline = timelineService.addTimeline(Timeline.builder().build());
         Wall wall = wallService.addWall(Wall.builder().build());

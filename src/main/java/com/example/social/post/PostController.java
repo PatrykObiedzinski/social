@@ -1,10 +1,7 @@
 package com.example.social.post;
 
 import lombok.AllArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @AllArgsConstructor
@@ -16,5 +13,11 @@ public class PostController {
     @PostMapping
     public void addPost(@RequestBody String content) {
         postService.addPost(content);
+    }
+
+    @PostMapping("/{authorId}")
+    public void addPostByUser(@PathVariable long authorId,
+                              @RequestBody String content) {
+        postService.addPostByUser(authorId, content);
     }
 }

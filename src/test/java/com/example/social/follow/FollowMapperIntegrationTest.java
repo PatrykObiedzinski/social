@@ -25,8 +25,8 @@ public class FollowMapperIntegrationTest extends BaseIntegrationTest {
 
         // then
         assertThat(followDto).satisfies(singleFollow -> {
-            assertThat(singleFollow.getFollowerId()).isEqualTo(1L);
-            assertThat(singleFollow.getFollowingId()).isEqualTo(2L);
+            assertThat(singleFollow.getFollowerId()).isEqualTo(MOCKED_FOLLOWER_ID);
+            assertThat(singleFollow.getFollowingId()).isEqualTo(MOCKED_FOLLOWING_ID);
         });
     }
 

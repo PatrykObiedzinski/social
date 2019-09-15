@@ -11,6 +11,12 @@ public class UserService {
     private final UserDao userDao;
 
     @Transactional
+    public User findById(Long id) {
+        return userDao.findById(id)
+                .orElseThrow(() -> new UserNotFoundException(id));
+    }
+
+    @Transactional
     public User addUser(User user) {
         return userDao.save(user);
     }
