@@ -21,21 +21,32 @@ class FollowService {
 
     @Transactional
     public void addFollow(FollowDto followDto) {
-        if (followDto.getFollowerId().equals(followDto.getFollowingId())) {
-            throw new IdenticalUsersException();
-        }
-
+        validateIdenticalUsers(followDto);
         User follower = getUserById(followDto, FollowDto::getFollowerId);
         User following = getUserById(followDto, FollowDto::getFollowingId);
+        validateIdenticalFollows(follower, following);
 
         Follow follow = followDao.save(buildFollow(follower, following));
         updateFollowerFollows(follower, follow);
+    }
+
+    private void validateIdenticalUsers(FollowDto followDto) {
+        if (followDto.getFollowerId().equals(followDto.getFollowingId())) {
+            throw new IdenticalUsersException();
+        }
     }
 
     private User getUserById(FollowDto followDto, Function<FollowDto, Long> followDtoToId) {
         Long id = followDtoToId.apply(followDto);
         return userDao.findById(id)
                 .orElseThrow(() -> new UserNotFoundException(id));
+    }
+
+    private void validateIdenticalFollows(User follower, User following) {
+        followDao.findByFollowerAndFollowingId(follower.getId(), following.getId())
+                .ifPresent(follow -> {
+                    throw new IdenticalFollowException(follow.getId());
+                });
     }
 
     private Follow buildFollow(User follower, User following) {

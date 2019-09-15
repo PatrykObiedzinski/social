@@ -22,4 +22,12 @@ public class FollowDao extends BaseDaoConfiguration {
                 .where(follow.id.eq(id))
                 .fetchOne());
     }
+
+    Optional<Follow> findByFollowerAndFollowingId(Long followerId, Long followingId) {
+        return Optional.ofNullable(getQueryFactory()
+                .selectFrom(follow)
+                .where(follow.follower.id.eq(followerId)
+                        .and(follow.following.id.eq(followingId)))
+                .fetchOne());
+    }
 }

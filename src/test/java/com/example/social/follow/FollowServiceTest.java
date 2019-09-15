@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.BDDMockito.given;
@@ -47,7 +48,7 @@ public class FollowServiceTest {
                 .willReturn(Optional.of(MOCKED_FOLLOWING));
         given(followDao.save(any())).willReturn(mockFollow());
         given(userService.addUser(any())).willReturn(mockUser(1L));
-        FollowDto followDto = mockFollowDto();
+        FollowDto followDto = mockFollowDto(MOCKED_FOLLOWER.getId(), MOCKED_FOLLOWING.getId());
 
         // when
         followService.addFollow(followDto);
@@ -60,17 +61,42 @@ public class FollowServiceTest {
         });
     }
 
+    @Test
+    public void should_throw_an_exception_when_identical_users() {
+        // given
+        FollowDto followDto = mockFollowDto(MOCKED_FOLLOWER.getId(), MOCKED_FOLLOWER.getId());
+
+        // when-then
+        assertThatThrownBy(() -> followService.addFollow(followDto))
+                .isInstanceOf(IdenticalUsersException.class);
+    }
+
+    @Test
+    public void should_throw_an_exception_when_identical_follows() {
+        // given
+        given(userDao.findById(anyLong()))
+                .willReturn(Optional.of(MOCKED_FOLLOWER))
+                .willReturn(Optional.of(MOCKED_FOLLOWING));
+        given(followDao.findByFollowerAndFollowingId(any(), any())).willReturn(Optional.of(mockFollow()));
+        FollowDto followDto = mockFollowDto(MOCKED_FOLLOWER.getId(), MOCKED_FOLLOWING.getId());
+
+        // when-then
+        assertThatThrownBy(() -> followService.addFollow(followDto))
+                .isInstanceOf(IdenticalFollowException.class);
+    }
+
     private Follow mockFollow() {
         return Follow.builder()
+                .id(1L)
                 .follower(MOCKED_FOLLOWER)
                 .following(MOCKED_FOLLOWING)
                 .build();
     }
 
-    private FollowDto mockFollowDto() {
+    private FollowDto mockFollowDto(Long followerId, Long followingId) {
         return FollowDto.builder()
-                .followerId(MOCKED_FOLLOWER.getId())
-                .followingId(MOCKED_FOLLOWING.getId())
+                .followerId(followerId)
+                .followingId(followingId)
                 .build();
     }
 
