@@ -1,19 +1,14 @@
 package com.example.social.post;
 
-import com.example.social.user.User;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 
 @Mapper(componentModel = "spring")
 public interface PostMapper {
 
-    default PostDto mapToPostDto(Post post) {
-        User author = post.getAuthor();
-
-        return PostDto.builder()
-                .authorName(author.getName())
-                .authorSurname(author.getSurname())
-                .content(post.getContent())
-                .creationTime(post.getCreationTime())
-                .build();
-    }
+    @Mapping(source = "author.name", target = "authorName")
+    @Mapping(source = "author.surname", target = "authorSurname")
+    @Mapping(source = "content", target = "content")
+    @Mapping(source = "creationTime", target = "creationTime")
+    PostDto mapToPostDto(Post post);
 }

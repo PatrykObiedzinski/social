@@ -1,6 +1,6 @@
 package com.example.social.follow;
 
-import com.example.social.post.Post;
+import com.example.social.post.PostDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -12,14 +12,16 @@ import java.util.List;
 @NoArgsConstructor
 @Getter
 @Builder
-class FollowPostDto {
+public class FollowPostDto {
 
-    private List<Post> posts;
+    private List<PostDto> followerPosts;
+    private List<PostDto> followingPosts;
 
     @Override
     public String toString() {
         return "FollowPostDto{" +
-                "posts=" + posts +
+                "followerPosts=" + followerPosts +
+                ", followingPosts=" + followingPosts +
                 '}';
     }
 }

@@ -1,7 +1,7 @@
 package com.example.social.timeline;
 
 import com.example.social.follow.FollowDto;
-import com.example.social.post.PostDto;
+import com.example.social.follow.FollowPostDto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -18,7 +18,7 @@ public class TimelineDto {
     private String ownerName;
     private String ownerSurname;
     private List<FollowDto> follows;
-    private List<PostDto> posts;
+    private List<FollowPostDto> posts;
 
     @Override
     public String toString() {

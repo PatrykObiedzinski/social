@@ -1,12 +1,11 @@
 package com.example.social.follow;
 
-import com.example.social.post.Post;
+import com.example.social.post.PostMapper;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 import org.mapstruct.Named;
 
-import java.util.List;
-
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring", uses = {PostMapper.class})
 public interface FollowMapper {
 
     @Named("followDto")
@@ -21,11 +20,7 @@ public interface FollowMapper {
     }
 
     @Named("followPostDto")
-    default FollowPostDto mapToFollowPostDto(Follow follow) {
-        List<Post> posts = follow.getFollowing().getPosts();
-
-        return FollowPostDto.builder()
-                .posts(posts)
-                .build();
-    }
+    @Mapping(source = "follower.posts", target = "followerPosts")
+    @Mapping(source = "following.posts", target = "followingPosts")
+    FollowPostDto mapToFollowPostDto(Follow follow);
 }

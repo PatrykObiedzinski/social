@@ -14,6 +14,7 @@ public class FollowMapperIntegrationTest extends BaseIntegrationTest {
     private static final long MOCKED_FOLLOWER_ID = 1L;
     private static final long MOCKED_FOLLOWING_ID = 2L;
     private static final long MOCKED_POST_ID = 1L;
+    private static final String MOCKED_TEXT_MESSAGE = "TEXT_MESSAGE";
 
     @Autowired
     private FollowMapper followMapper;
@@ -42,9 +43,12 @@ public class FollowMapperIntegrationTest extends BaseIntegrationTest {
         FollowPostDto followPostDto = followMapper.mapToFollowPostDto(follow);
 
         // then
-        assertThat(followPostDto.getPosts()).isNotEmpty();
-        assertThat(followPostDto.getPosts()).first().satisfies(singleFollow ->
-                assertThat(singleFollow.getId()).isEqualTo(MOCKED_POST_ID));
+        assertThat(followPostDto.getFollowerPosts()).isNotEmpty();
+        assertThat(followPostDto.getFollowingPosts()).isNotEmpty();
+        assertThat(followPostDto.getFollowerPosts()).first().satisfies(singlePost ->
+                assertThat(singlePost.getContent()).isEqualTo(MOCKED_TEXT_MESSAGE));
+        assertThat(followPostDto.getFollowingPosts()).first().satisfies(singlePost ->
+                assertThat(singlePost.getContent()).isEqualTo(MOCKED_TEXT_MESSAGE));
     }
 
     private Follow mockFollow() {
@@ -64,6 +68,7 @@ public class FollowMapperIntegrationTest extends BaseIntegrationTest {
     private Post mockPost() {
         return Post.builder()
                 .id(MOCKED_POST_ID)
+                .content(MOCKED_TEXT_MESSAGE)
                 .build();
     }
 }
