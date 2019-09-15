@@ -4,5 +4,5 @@ interface PostService {
 
     void addPost(String content);
 
-    void addPostByUser(long authorId, String content);
+    void addPostByConcreteUser(long authorId, String content);
 }

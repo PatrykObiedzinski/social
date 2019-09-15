@@ -1,12 +1,10 @@
 package com.example.social.post;
 
 import com.example.social.timeline.Timeline;
-import com.example.social.timeline.TimelineService;
 import com.example.social.user.User;
 import com.example.social.user.UserService;
 import com.example.social.utils.TimeUtil;
 import com.example.social.wall.Wall;
-import com.example.social.wall.WallService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
@@ -20,7 +18,6 @@ import java.util.ArrayList;
 import java.util.function.Consumer;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
@@ -38,10 +35,6 @@ public class PostServiceImplTest {
     private TimeUtil timeUtil;
     @Mock
     private UserService userService;
-    @Mock
-    private TimelineService timelineService;
-    @Mock
-    private WallService wallService;
 
     @Captor
     private ArgumentCaptor<Post> saveArgumentCaptor;
@@ -52,10 +45,8 @@ public class PostServiceImplTest {
     @Test
     public void should_add_post() {
         // given
+        given(userService.addMockedUser()).willReturn(mockUser());
         given(timeUtil.getCurrentDate()).willReturn(MOCKED_CREATION_TIME);
-        given(userService.addUser(any())).willReturn(mockUser());
-        given(timelineService.addTimeline(any())).willReturn(mockTimeline());
-        given(wallService.addWall(any())).willReturn(mockWall());
 
         // when
         postService.addPost(MOCKED_TEXT_MESSAGE);
@@ -70,13 +61,13 @@ public class PostServiceImplTest {
     }
 
     @Test
-    public void should_add_post_by_user() {
+    public void should_add_post_by_concrete_user() {
         // given
         given(timeUtil.getCurrentDate()).willReturn(MOCKED_CREATION_TIME);
         given(userService.findById(anyLong())).willReturn(mockUser());
 
         // when
-        postService.addPostByUser(MOCKED_AUTHOR_ID, MOCKED_TEXT_MESSAGE);
+        postService.addPostByConcreteUser(MOCKED_AUTHOR_ID, MOCKED_TEXT_MESSAGE);
 
         // then
         verify(postDao).save(saveArgumentCaptor.capture());

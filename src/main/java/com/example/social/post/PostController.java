@@ -18,6 +18,6 @@ public class PostController {
     @PostMapping("/{authorId}")
     public void addPostByUser(@PathVariable long authorId,
                               @RequestBody String content) {
-        postService.addPostByUser(authorId, content);
+        postService.addPostByConcreteUser(authorId, content);
     }
 }
