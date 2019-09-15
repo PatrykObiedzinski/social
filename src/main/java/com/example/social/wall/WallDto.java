@@ -2,16 +2,16 @@ package com.example.social.wall;
 
 import com.example.social.post.PostDto;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
-@Builder
+@Setter
 class WallDto {
 
     private String ownerName;
