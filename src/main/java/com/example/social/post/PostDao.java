@@ -11,15 +11,15 @@ import static com.example.social.post.QPost.post;
 @Repository
 class PostDao extends BaseDaoConfiguration {
 
+    @Transactional
+    public Post save(Post post) {
+        return getEntityManager().merge(post);
+    }
+
     Optional<Post> findById(long id) {
         return Optional.ofNullable(getQueryFactory()
                 .selectFrom(post)
                 .where(post.id.eq(id))
                 .fetchOne());
-    }
-
-    @Transactional
-    Post save(Post post) {
-        return getEntityManager().merge(post);
     }
 }

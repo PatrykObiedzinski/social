@@ -11,15 +11,15 @@ import static com.example.social.follow.QFollow.follow;
 @Repository
 public class FollowDao extends BaseDaoConfiguration {
 
+    @Transactional
+    public Follow save(Follow follow) {
+        return getEntityManager().merge(follow);
+    }
+
     Optional<Follow> findById(long id) {
         return Optional.ofNullable(getQueryFactory()
                 .selectFrom(follow)
                 .where(follow.id.eq(id))
                 .fetchOne());
-    }
-
-    @Transactional
-    Follow save(Follow follow) {
-        return getEntityManager().merge(follow);
     }
 }

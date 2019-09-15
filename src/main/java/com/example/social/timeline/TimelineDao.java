@@ -11,15 +11,15 @@ import static com.example.social.timeline.QTimeline.timeline;
 @Repository
 class TimelineDao extends BaseDaoConfiguration {
 
+    @Transactional
+    public Timeline save(Timeline timeline) {
+        return getEntityManager().merge(timeline);
+    }
+
     Optional<Timeline> findByOwnerId(long ownerId) {
         return Optional.ofNullable(getQueryFactory()
                 .selectFrom(timeline)
                 .where(timeline.owner.id.eq(ownerId))
                 .fetchOne());
-    }
-
-    @Transactional
-    Timeline save(Timeline timeline) {
-        return getEntityManager().merge(timeline);
     }
 }

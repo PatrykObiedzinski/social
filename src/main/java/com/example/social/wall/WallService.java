@@ -10,13 +10,13 @@ public class WallService {
 
     private final WallDao wallDao;
 
-    Wall getWallByOwnerId(long ownerId) {
-        return wallDao.findByOwnerId(ownerId)
-                .orElseThrow(() -> new WallNotFoundException(ownerId));
-    }
-
     @Transactional
     public Wall addWall(Wall wall) {
         return wallDao.save(wall);
+    }
+
+    Wall getWallByOwnerId(long ownerId) {
+        return wallDao.findByOwnerId(ownerId)
+                .orElseThrow(() -> new WallNotFoundException(ownerId));
     }
 }

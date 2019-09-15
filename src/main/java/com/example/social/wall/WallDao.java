@@ -11,15 +11,15 @@ import static com.example.social.wall.QWall.wall;
 @Repository
 public class WallDao extends BaseDaoConfiguration {
 
+    @Transactional
+    public Wall save(Wall wall) {
+        return getEntityManager().merge(wall);
+    }
+
     Optional<Wall> findByOwnerId(long ownerId) {
         return Optional.ofNullable(getQueryFactory()
                 .selectFrom(wall)
                 .where(wall.owner.id.eq(ownerId))
                 .fetchOne());
-    }
-
-    @Transactional
-    Wall save(Wall wall) {
-        return getEntityManager().merge(wall);
     }
 }

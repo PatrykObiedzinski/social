@@ -20,7 +20,7 @@ class FollowService {
     private final UserService userService;
 
     @Transactional
-    void addFollow(FollowDto followDto) {
+    public void addFollow(FollowDto followDto) {
         if (followDto.getFollowerId().equals(followDto.getFollowingId())) {
             throw new IdenticalUsersException();
         }

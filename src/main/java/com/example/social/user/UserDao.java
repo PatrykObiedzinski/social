@@ -11,15 +11,15 @@ import static com.example.social.user.QUser.user;
 @Repository
 public class UserDao extends BaseDaoConfiguration {
 
+    @Transactional
+    public User save(User user) {
+        return getEntityManager().merge(user);
+    }
+
     public Optional<User> findById(long id) {
         return Optional.ofNullable(getQueryFactory()
                 .selectFrom(user)
                 .where(user.id.eq(id))
                 .fetchOne());
-    }
-
-    @Transactional
-    User save(User user) {
-        return getEntityManager().merge(user);
     }
 }

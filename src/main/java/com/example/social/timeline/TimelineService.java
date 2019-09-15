@@ -10,13 +10,13 @@ public class TimelineService {
 
     private final TimelineDao timelineDao;
 
-    Timeline getTimelineByOwnerId(long ownerId) {
-        return timelineDao.findByOwnerId(ownerId)
-                .orElseThrow(() -> new TimelineNotFoundException(ownerId));
-    }
-
     @Transactional
     public Timeline addTimeline(Timeline timeline) {
         return timelineDao.save(timeline);
+    }
+
+    Timeline getTimelineByOwnerId(long ownerId) {
+        return timelineDao.findByOwnerId(ownerId)
+                .orElseThrow(() -> new TimelineNotFoundException(ownerId));
     }
 }
