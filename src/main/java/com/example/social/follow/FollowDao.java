@@ -19,7 +19,7 @@ public class FollowDao extends BaseDaoConfiguration {
     }
 
     @Transactional
-    void save(Follow follow) {
-        getEntityManager().merge(follow);
+    Follow save(Follow follow) {
+        return getEntityManager().merge(follow);
     }
 }
