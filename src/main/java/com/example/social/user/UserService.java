@@ -18,7 +18,6 @@ public class UserService {
     private final TimelineService timelineService;
     private final WallService wallService;
 
-    @Transactional
     public User findById(Long id) {
         return userDao.findById(id)
                 .orElseThrow(() -> new UserNotFoundException(id));
