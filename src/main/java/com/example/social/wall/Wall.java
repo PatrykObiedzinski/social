@@ -18,7 +18,7 @@ import java.io.Serializable;
 public class Wall implements Serializable {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID")
     private Long id;
 

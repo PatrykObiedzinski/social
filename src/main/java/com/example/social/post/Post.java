@@ -19,7 +19,7 @@ import java.time.LocalDateTime;
 public class Post implements Serializable {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID")
     private Long id;
 
