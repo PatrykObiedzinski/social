@@ -1,5 +1,5 @@
 # social
-Social app for HStoneChallenge
+Social app for HStoneAge code challenge
 
 1. In order to launch an application, you need to use the following:
 a) mvn clean install -T 1C
