@@ -1,7 +1,8 @@
 # social
 Social app for HStoneAge code challenge
-
+Instruction:
 1. In order to launch an application, you need to use the following:
+
 a) mvn clean install -T 1C
 b) mvn spring-boot:run
 
@@ -13,7 +14,7 @@ You may use it to make requests in an easier way as well.
 http://localhost:8080/h2
 to check database state.
 
-Author's comments:
+Others:
 1. Integration tests are disabled by default. Some of them won't work as long as there are no initial rows.
 It might've been achieved by creating them in data.sql file for H2 database.
 2. FollowDto has two fields due to no logging mechanism.
