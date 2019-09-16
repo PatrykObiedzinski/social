@@ -15,7 +15,7 @@
     <description>Social application</description>
 
     <properties>
-        <java.version>1.8</java.version>
+        <java.version>1.10</java.version>
         <swagger.version>2.6.1</swagger.version>
         <swaggerui.version>2.6.1</swaggerui.version>
         <querydsljpa.version>4.2.1</querydsljpa.version>
