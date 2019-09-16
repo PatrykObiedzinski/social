@@ -41,10 +41,10 @@ public class UserDaoIntegrationTest extends BaseIntegrationTest {
         User user = mockUser();
 
         // when
-        userDao.save(user);
+        User userFromDatabase = userDao.save(user);
 
         // then
-        assertThat(userDao.findById(1)).isNotNull();
+        assertThat(userFromDatabase).isNotNull();
     }
 
     private User mockUser() {

@@ -36,10 +36,10 @@ public class WallDaoIntegrationTest extends BaseIntegrationTest {
         Wall wall = mockWall();
 
         // when
-        wallDao.save(wall);
+        Wall wallFromDatabase = wallDao.save(wall);
 
         // then
-        assertThat(wallDao.findByOwnerId(1)).isNotNull();
+        assertThat(wallFromDatabase).isNotNull();
     }
 
     private Wall mockWall() {

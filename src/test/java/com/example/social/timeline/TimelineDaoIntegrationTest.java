@@ -36,10 +36,10 @@ public class TimelineDaoIntegrationTest extends BaseIntegrationTest {
         Timeline timeline = mockTimeline();
 
         // when
-        timelineDao.save(timeline);
+        Timeline timelineFromDatabase = timelineDao.save(timeline);
 
         // then
-        assertThat(timelineDao.findByOwnerId(1)).isNotNull();
+        assertThat(timelineFromDatabase).isNotNull();
     }
 
     private Timeline mockTimeline() {

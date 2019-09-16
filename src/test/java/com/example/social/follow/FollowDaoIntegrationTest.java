@@ -26,10 +26,10 @@ public class FollowDaoIntegrationTest extends BaseIntegrationTest {
         Follow follow = mockFollow();
 
         // when
-        followDao.save(follow);
+        Follow followFromDatabase = followDao.save(follow);
 
         // then
-        assertThat(followDao.findById(MOCKED_FOLLOW_ID)).isNotNull();
+        assertThat(followFromDatabase).isNotNull();
     }
 
     @Test

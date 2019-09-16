@@ -10,7 +10,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 public class PostControllerIntegrationTest extends BaseIntegrationTest {
 
-    private static final long MOCKED_AUTHOR_ID = 1L;
+    private static final long NONEXISTENT_USER = 16123L;
     private static final String MOCKED_CONTENT = "TEXT MESSAGE";
 
     @Test
@@ -27,7 +27,7 @@ public class PostControllerIntegrationTest extends BaseIntegrationTest {
     @Test
     public void should_throw_an_exception_when_no_user_found() throws Exception {
         // when
-        MvcResult mvcResult = mockMvc.perform(post("/posts/{authorId}", MOCKED_AUTHOR_ID).content("TEXT MESSAGE"))
+        MvcResult mvcResult = mockMvc.perform(post("/posts/{authorId}", NONEXISTENT_USER).content("TEXT MESSAGE"))
                 .andExpect(status().is4xxClientError())
                 .andReturn();
 
