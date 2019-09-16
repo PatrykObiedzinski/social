@@ -35,7 +35,7 @@ public class SwaggerConfiguration {
 
     private ApiInfo buildApiInfo() {
         return new ApiInfoBuilder()
-                .title("Swagger for a social app")
+                .title("Swagger for a social app - HStoneAge code challenge")
                 .description("An easy documentation")
                 .contact(new Contact("Patryk Obiedziński",
                         "https://github.com/PatrykObiedzinski/social",
