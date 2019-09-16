@@ -20,5 +20,5 @@ It might've been achieved by creating them in data.sql file for H2 database.
 2. FollowDto has two fields due to no logging mechanism.
 3. You can't follow the same person twice.
 4. You can't follow yourself.
-5. Technologies: Java 8, Spring 5(Spring Core, Spring Boot, Spring MVC), Swagger2, QueryDSL, MapStruct, H2 in-memory database, 
+5. Technologies: Java 10, Spring 5(Spring Core, Spring Boot, Spring MVC), Swagger2, QueryDSL, MapStruct, H2 in-memory database, 
 Lombok, Maven, JPA, Hibernate ORM
