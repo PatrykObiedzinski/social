@@ -20,7 +20,7 @@ public interface FollowUserMapper {
                 .build();
     }
 
-    default List<PostDto> getPostDtos(User user, PostMapper postMapper) {
+    private List<PostDto> getPostDtos(User user, PostMapper postMapper) {
         return user.getPosts().stream()
                 .map(postMapper::mapToPostDto)
                 .collect(toList());
