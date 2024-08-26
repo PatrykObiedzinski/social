@@ -17,7 +17,7 @@
     <properties>
         <java.version>1.10</java.version>
         <swagger.version>2.6.1</swagger.version>
-        <swaggerui.version>2.6.1</swaggerui.version>
+        <swaggerui.version>2.10.0</swaggerui.version>
         <querydsljpa.version>4.2.1</querydsljpa.version>
         <querydslapt.version>4.0.9</querydslapt.version>
         <querydslcore.version>4.0.9</querydslcore.version>
